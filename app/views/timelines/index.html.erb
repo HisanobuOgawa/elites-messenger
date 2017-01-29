@@ -6,6 +6,8 @@
         <%= f.label :message %><br/>
         <% if @input_message.persisted? %>
           編集中
+        <% elsif @reply_timeline %>
+          <%= @reply_timeline.user.name %>の「<%= truncate(@reply_timeline.message, length: 7) %>」に返信
         <% end %>
         <br/>
         
@@ -20,7 +22,7 @@
           <% end %>
         </div>  
         <div class="post">
-          <% if @input_message.persisted? %>
+          <% if @input_message.persisted? || @reply_timeline %>
             <%= link_to root_path do %>
               <%= button_tag 'Cancel', class: 'btn btn-default' %>
             <% end %>
@@ -28,6 +30,7 @@
           <%= f.submit 'Post', class: 'btn btn-primary' %>
         </div>
       </div>
+      <%= f.hidden_field :reply_id, value: @reply_timeline.id if @reply_timeline %>
     <% end %>
   </div>
   
@@ -60,6 +63,7 @@
           <% end %>
         <% end %>
       </div>
+      <%= render 'timelines/timeline', t: t %>
     <% end %>
     
   </div>
