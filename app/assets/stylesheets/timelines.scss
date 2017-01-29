@@ -20,9 +20,8 @@
       }
     }
   }
-}
 
-.timeline {
+  .timeline {
     .per {
       border-radius: 5px;
       padding: 10px;
@@ -32,7 +31,7 @@
       &.mine {
         background-color: #C1EFFF;
       }
-      
+
       &.reply {
         margin-top: 0px;
       }
@@ -56,11 +55,24 @@
         vertical-align: top;
         word-wrap: break-word;
       }
-      }
-      .user_filter {
-        margin-bottom: 20px;
-      .actions {
-        text-align: right;
+      .operation {
+        display: inline-block;
+        button {
+          margin-bottom: 3px;
+        }
+        .button_to {
+          input.btn {
+            width: 50px;
+          }
+        }
       }
     }
   }
+
+  .user_filter {
+    margin-bottom: 20px;
+    .actions {
+      text-align: right;
+    }
+  }
+}
