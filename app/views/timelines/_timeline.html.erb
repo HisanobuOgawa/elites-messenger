@@ -5,7 +5,6 @@
 
 <div class="per <%= 'mine' if mypost?(t) %> <%= 'reply' if is_reply %>">
   <p class="icon">
-    <!-- サムネイルの設定確認 -->
     <% if t.user.thumbnail? %>
       <%= image_tag t.user.thumbnail.url %>
     <% else %>
@@ -15,19 +14,29 @@
   <%= simple_format t.message, class: 'message' %>
   <% if mypost?(t) %>
     <div class="operation">
-  
       <%= link_to root_path(id: t.id, message: t.message) do %>
         <%= button_tag 'Edit', class: 'btn btn-info' %>
       <% end %>
       <%= button_to 'Del', timeline_path(t), method: :delete, class: 'btn btn-danger', data: {confirm: '削除してよろしいですか？'}  %>
     </div>
   <% else %>
-    <!-- 他人の投稿の場合、Reボタンを表示 -->
     <%= link_to root_path(reply_id: t.id) do %>
       <%= button_tag 'Re', class: 'btn btn-info' %>
     <% end %>
+    <% unless t.likes.exists?(user_id: current_user) %>
+      <div class="clickale-like-link clickable-like-link-<%= t.id %>">
+        <%= link_to 'Like', timeline_likes_path(timeline_id: t.id, format: :json), remote: true, method: :post %>
+        <!--とりあえずlikeを実装。後から、「再度クリックしたらunlikeできる」仕様にしたい-->
+      </div>
+    <% end %>
+    <div class="likes-counter likes-counter-<%= t.id %>">
+      <% if t.likes.count>0 %>
+        <%= render 'likes/like', ctr: t.likes.count %>
+      <% end %>
+    </div>
   <% end %>
 </div>
+
 <% t.replies.each do |r| %>
   <%= render 'timelines/timeline', t: r, is_reply: true %>
 <% end %>

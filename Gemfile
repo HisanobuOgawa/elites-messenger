@@ -52,5 +52,9 @@ group :development do
   
   gem 'letter_opener_web'
   
+  gem 'hirb' 
+  
+  gem 'hirb-unicode'
+  
 end
 
