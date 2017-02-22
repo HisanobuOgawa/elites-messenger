@@ -16,11 +16,15 @@ class TimelinesController < ApplicationController
     timeline.user_id = current_user.id
     if timeline.valid? # バリデーションチェック
       timeline.save!
+      
        respond_to do |format|
           format.html do
+            redirect_to timelines_path
           end
           format.json do
             html = render_to_string partial: 'timelines/timeline', layout: false, formats: :html, locals: { t: timeline }
+            puts html
+            
             render json: {timeline: html}
           end
       end
