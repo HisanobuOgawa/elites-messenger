@@ -11,7 +11,15 @@ $(function(){
     // Ajaxレスポンス
     if ( status == 'success') {
       var json = JSON.parse(data.responseText);
-      $('div.timeline').prepend(json.timeline);
+      if (json.timeline)  {
+        $('div.alert').empty();
+        $('div.timeline').prepend(json.timeline);
+      } else if (json.error) {
+        $('div.alert').empty();
+        for( var i in json.error) {
+          $('div.alert').append($('<p>' + json.error[i] + '</p>'));
+        }
+      }
     }
   });
 });

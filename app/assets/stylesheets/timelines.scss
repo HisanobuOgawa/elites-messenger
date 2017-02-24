@@ -68,6 +68,23 @@
       }
     }
   }
+  
+  
+  .clickale-like-link {
+        font-size: 90%;
+        margin-top: 5px;
+      }
+      .likes-counter {
+        font-size: 80%;
+        color: #666;
+        hr {
+          border: 0;
+          height: 1px;
+          background-color: #ccc;
+          margin: 5px 0;
+        }
+      }
+  
 
   .user_filter {
     margin-bottom: 20px;

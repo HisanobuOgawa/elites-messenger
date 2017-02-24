@@ -2,10 +2,14 @@ Rails.application.routes.draw do
   root to: 'timelines#index'
 
   devise_for :users
+  
+  
   resources :timelines do
     collection do
       post 'filter_by_user'
     end
+    
+    resources :likes, only: [:create]
   end
   
    if Rails.env.development?
