@@ -23,7 +23,6 @@ class TimelinesController < ApplicationController
           end
           format.json do
             html = render_to_string partial: 'timelines/timeline', layout: false, formats: :html, locals: { t: timeline }
-            puts html
             
             render json: {timeline: html}
           end
